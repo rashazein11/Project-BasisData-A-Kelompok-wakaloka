@@ -1,6 +1,6 @@
 # WakaLoka (Wisata Lokal Wakatobi)
 
-**Kelompok 2 – EdTech** · Product Requirements Document (PRD)
+**Kelompok 1 – Basis Data - A** · Product Requirements Document (PRD)
 
 *Explore Wakatobi, Support Local*
 
@@ -102,6 +102,7 @@ Atribut class memakai camelCase (misalnya `noTelp`) dan kolom tabel memakai snak
 | Diagram | File |
 |---|---|
 | ERD (notasi crow's foot) | `docs/ERD_WAKALOKA.drawio` |
+| ERD WAKALOKA Chen.drawio | `ERD_WAKALOKA_Chen.drawio`|
 | Class Diagram | `docs/ClassDiagram_WAKALOKA.drawio` |
 
 Kedua file dapat dibuka di Google Drive (https://drive.google.com/drive/folders/1Wozk-8aUyhlT0MUuHrcFAYlq6ZlRbGT-?usp=sharing)
