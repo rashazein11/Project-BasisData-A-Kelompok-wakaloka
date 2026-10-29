@@ -1,0 +1,640 @@
+/* =========================
+   FONT (EMBEDDED)
+   ========================= */
+@font-face {
+  font-family: 'Oleo Script Swash Caps';
+  src: url('../fonts/oleo-script-400.woff2') format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Alexandria';
+  src: url('../fonts/alexandria-400.woff2') format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Alexandria';
+  src: url('../fonts/alexandria-600.woff2') format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'AR One Sans';
+  src: url('../fonts/ar-one-sans-400.woff2') format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'AR One Sans';
+  src: url('../fonts/ar-one-sans-600.woff2') format('woff2');
+  font-weight: bold;
+}
+
+/* =========================
+   PENGATURAN DASAR HALAMAN
+   Warna: hijau #8DA249, jingga #F89254, biru #7BADCA,
+          kuning #FFDE59, krem #FBE1B5
+   ========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'AR One Sans', Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #2b3214;
+  background-color: #fff4df;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wrap {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =========================
+   TIPOGRAFI
+   ========================= */
+h1, h2, h3 {
+  font-family: 'Alexandria', Arial, Helvetica, sans-serif;
+  line-height: 1.3;
+  margin: 0 0 12px 0;
+}
+
+h1 {
+  font-size: 44px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 19px;
+}
+
+p {
+  margin: 0 0 16px 0;
+  max-width: 680px;
+}
+
+.brand {
+  font-family: 'Oleo Script Swash Caps', cursive;
+  font-weight: normal;
+}
+
+.brand-footer {
+  font-size: 24px;
+}
+
+.jarak-atas {
+  margin-top: 20px;
+}
+
+.catatan {
+  font-size: 14px;
+}
+
+/* =========================
+   HYPERLINK
+   ========================= */
+a {
+  color: #b8541a;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* =========================
+   HEADER & NAVIGASI
+   ========================= */
+.site-header {
+  background-color: #4f5f26;
+  color: #fff4df;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 10px 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Oleo Script Swash Caps', cursive;
+  font-size: 28px;
+  color: #fbe1b5;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 42px;
+  height: 42px;
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  display: block;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-family: 'Alexandria', Arial, sans-serif;
+  font-size: 15px;
+  color: #fff4df;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav a[aria-current="page"] {
+  background-color: #ffde59;
+  color: #2b3214;
+  font-weight: bold;
+}
+
+/* =========================
+   HERO (BERANDA)
+   ========================= */
+.hero {
+  background: linear-gradient(165deg, #f89254 0%, #c9a24d 40%, #8da249 100%);
+  padding: 70px 0;
+}
+
+.hero .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-teks {
+  flex: 1 1 340px;
+}
+
+.hero-teks h1 {
+  color: #ffffff;
+}
+
+.hero-teks p {
+  font-size: 18px;
+  color: #1d2209;
+}
+
+.tagline {
+  font-family: 'Oleo Script Swash Caps', cursive;
+  font-size: 26px;
+  color: #fff4df;
+  margin-bottom: 6px;
+}
+
+.hero-gambar {
+  flex: 1 1 320px;
+}
+
+.hero-gambar img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border: 5px solid #fff4df;
+  border-radius: 28px;
+}
+
+/* =========================
+   TOMBOL
+   ========================= */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  background-color: #ffde59;
+  color: #2b3214;
+  font-family: 'Alexandria', Arial, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  border: 2px solid #2b3214;
+  border-radius: 30px;
+}
+
+.btn:hover {
+  background-color: #fff4df;
+}
+
+.btn-grup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-garis {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.btn-garis:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================
+   SECTION & JUDUL HALAMAN
+   ========================= */
+.section {
+  padding: 56px 0;
+}
+
+.section.krem {
+  background-color: #fbe1b5;
+}
+
+.section-judul {
+  margin-bottom: 24px;
+}
+
+.page-head {
+  background: linear-gradient(120deg, #8da249 0%, #fbe1b5 100%);
+  padding: 40px 0;
+}
+
+.page-head p {
+  font-size: 18px;
+}
+
+/* =========================
+   KARTU DESTINASI (FLEXBOX)
+   ========================= */
+.kartu-grup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.kartu {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 2px solid #fbe1b5;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.kartu img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.kartu-isi {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 22px 24px 22px;
+}
+
+.kartu-isi p {
+  font-size: 16px;
+}
+
+.kartu-isi .btn {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 8px 20px;
+  font-size: 15px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+.meta li {
+  background-color: #7badca;
+  color: #10222d;
+  font-family: 'Alexandria', Arial, sans-serif;
+  font-size: 13px;
+  padding: 2px 13px;
+  border-radius: 20px;
+}
+
+/* =========================
+   KOTAK INFORMASI
+   ========================= */
+.info-kotak {
+  flex: 1 1 260px;
+  background-color: #fbe1b5;
+  padding: 20px 24px;
+  border-left: 8px solid #f89254;
+  border-radius: 14px;
+}
+
+.section.krem .info-kotak {
+  background-color: #fff4df;
+}
+
+/* =========================
+   DAFTAR
+   ========================= */
+ul.rapi {
+  padding-left: 22px;
+}
+
+ul.rapi li {
+  margin-bottom: 6px;
+}
+
+.langkah {
+  padding-left: 22px;
+  margin: 0;
+}
+
+.langkah li {
+  margin-bottom: 8px;
+}
+
+/* =========================
+   PALET WARNA & TIPOGRAFI (HALAMAN PROFIL)
+   ========================= */
+.palet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.palet li {
+  flex: 1 1 170px;
+  background-color: #ffffff;
+  border: 2px solid #fbe1b5;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.swatch {
+  height: 84px;
+}
+
+.warna-hijau {
+  background-color: #8da249;
+}
+
+.warna-jingga {
+  background-color: #f89254;
+}
+
+.warna-biru {
+  background-color: #7badca;
+}
+
+.warna-kuning {
+  background-color: #ffde59;
+}
+
+.warna-krem {
+  background-color: #fbe1b5;
+}
+
+.ket {
+  padding: 12px 14px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.ket strong {
+  display: block;
+  font-family: 'Alexandria', Arial, sans-serif;
+}
+
+.contoh-brand {
+  font-family: 'Oleo Script Swash Caps', cursive;
+  font-size: 32px;
+  margin: 0;
+}
+
+.contoh-ui {
+  font-family: 'Alexandria', Arial, sans-serif;
+  font-size: 22px;
+  margin: 0 0 6px 0;
+}
+
+.contoh-isi {
+  margin: 0 0 6px 0;
+}
+
+/* =========================
+   GALERI
+   ========================= */
+.galeri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.galeri figure {
+  flex: 1 1 300px;
+  margin: 0;
+  background-color: #ffffff;
+  border: 2px solid #fbe1b5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.galeri img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+.galeri figcaption {
+  padding: 14px 18px;
+  font-size: 15px;
+}
+
+.galeri figcaption strong {
+  display: block;
+  font-family: 'Alexandria', Arial, sans-serif;
+}
+
+/* =========================
+   TABEL
+   ========================= */
+.tabel-scroll {
+  overflow-x: auto;
+  border: 2px solid #8da249;
+  border-radius: 16px;
+}
+
+table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+caption {
+  text-align: left;
+  font-family: 'Alexandria', Arial, sans-serif;
+  font-weight: bold;
+  background-color: #fbe1b5;
+  padding: 14px 16px;
+}
+
+th, td {
+  text-align: left;
+  padding: 11px 16px;
+  border-bottom: 1px solid #fbe1b5;
+}
+
+thead th {
+  background-color: #4f5f26;
+  color: #fff4df;
+  font-family: 'Alexandria', Arial, sans-serif;
+  font-size: 14px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fff4df;
+}
+
+tfoot th, tfoot td {
+  background-color: #fbe1b5;
+  font-weight: bold;
+}
+
+.angka {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabel-blok {
+  margin-bottom: 36px;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+.site-footer {
+  background-color: #4f5f26;
+  color: #fff4df;
+  font-size: 15px;
+  padding: 32px 0;
+}
+
+.site-footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px 48px;
+}
+
+.site-footer p {
+  margin: 0 0 5px 0;
+}
+
+.site-footer a {
+  color: #ffde59;
+}
+
+/* =========================
+   RESPONSIVE: TABLET
+   ========================= */
+@media (max-width: 900px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  .hero {
+    padding: 48px 0;
+  }
+
+  .hero .wrap {
+    gap: 28px;
+  }
+
+  .hero-gambar img {
+    height: 280px;
+  }
+}
+
+/* =========================
+   RESPONSIVE: MOBILE
+   ========================= */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .site-header .wrap {
+    justify-content: center;
+  }
+
+  .nav ul {
+    justify-content: center;
+  }
+
+  .nav a {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .section {
+    padding: 36px 0;
+  }
+
+  .hero-gambar img {
+    height: 220px;
+  }
+
+  .btn-grup .btn {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  th, td {
+    padding: 9px 11px;
+  }
+}

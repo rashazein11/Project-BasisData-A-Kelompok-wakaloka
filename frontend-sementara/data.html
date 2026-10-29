@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tarif tiket, contoh pesanan, alur, dan fitur Wakaloka.">
+  <title>Data | Wakaloka</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Header & navigasi: sama di semua halaman -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html"><img src="assets/images/logo-wakaloka.svg" alt="Logo Wakaloka berbentuk bunga" width="42" height="42"><span>Wakaloka</span></a>
+      <nav class="nav" aria-label="Navigasi utama">
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="profil.html">Profil</a></li>
+        <li><a href="galeri.html">Galeri</a></li>
+        <li><a href="data.html" aria-current="page">Data</a></li>
+      </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <h1>Data tarif dan pemesanan</h1>
+        <p>Tarif tiket, contoh pesanan, dan alur halaman pada prototipe Wakaloka.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="tarif">
+      <div class="wrap">
+        <div class="tabel-blok">
+          <h2 id="tarif">Tarif dan rating destinasi</h2>
+          <div class="tabel-scroll">
+            <table>
+              <caption>Enam destinasi wisata di Wakatobi</caption>
+              <thead><tr><th scope="col">Destinasi</th><th scope="col" class="angka">Harga tiket</th><th scope="col" class="angka">Rating</th></tr></thead>
+              <tbody>
+              <tr><th scope="row">Tomia Puncak Khayangan</th><td class="angka">Rp 25.000</td><td class="angka">5,0</td></tr>
+              <tr><th scope="row">Mangrove Sombano</th><td class="angka">Rp 25.000</td><td class="angka">4,7</td></tr>
+              <tr><th scope="row">Pantai Pulau Anano</th><td class="angka">Rp 159.000</td><td class="angka">5,0</td></tr>
+              <tr><th scope="row">Pulau Binongko</th><td class="angka">Rp 50.000</td><td class="angka">5,0</td></tr>
+              <tr><th scope="row">Pulau Hoga</th><td class="angka">Rp 150.000</td><td class="angka">5,0</td></tr>
+              <tr><th scope="row">Goa Kontamale</th><td class="angka">Rp 20.000</td><td class="angka">4,8</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tabel-blok">
+          <h2 id="pesanan">Contoh pesanan</h2>
+          <p>Paket Tomia Puncak Khayangan untuk 1 orang, jadwal 25 April 2026, berlaku hingga 2 Mei 2026 (tiket tidak berlaku setelah tanggal tersebut).</p>
+          <div class="tabel-scroll">
+            <table>
+              <caption>Ringkasan pembayaran</caption>
+              <thead><tr><th scope="col">Item</th><th scope="col" class="angka">Jumlah</th><th scope="col" class="angka">Harga</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Paket Tomia Puncak Khayangan</th><td class="angka">1</td><td class="angka">Rp 25.000</td></tr>
+                <tr><th scope="row">Tenun Gelo (UMKM)</th><td class="angka">1</td><td class="angka">Rp 190.000</td></tr>
+              </tbody>
+              <tfoot><tr><th scope="row" colspan="2">Total pembayaran</th><td class="angka">Rp 215.000</td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section krem" aria-labelledby="alur">
+      <div class="wrap">
+        <h2 id="alur">Alur halaman aplikasi</h2>
+        <div class="kartu-grup">
+          <div class="info-kotak">
+            <ol class="langkah">
+              <li><strong>Halaman Awal</strong>: tombol Start memulai aplikasi.</li>
+              <li><strong>Login</strong>: masuk dengan email atau nomor telepon dan password.</li>
+              <li><strong>Home</strong>: 2 rekomendasi wisata, tombol View, Explore, dan Profile.</li>
+              <li><strong>Explore</strong>: 6 pilihan wisata dengan tombol View.</li>
+            </ol>
+          </div>
+          <div class="info-kotak">
+            <ol class="langkah" start="5">
+              <li><strong>Profil wisata</strong>: detail destinasi dan produk UMKM, tombol Check Out.</li>
+              <li><strong>Check Out</strong>: konfirmasi pesanan, tombol Order Now.</li>
+              <li><strong>E-Tiket</strong>: tiket digital dengan ID tiket untuk petugas loket.</li>
+              <li><strong>Terima kasih</strong>: tombol Kembali ke Beranda.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="fitur">
+      <div class="wrap">
+        <h2 id="fitur">Fitur utama</h2>
+        <div class="tabel-scroll">
+          <table>
+            <caption>Fitur pada prototipe Wakaloka</caption>
+            <thead><tr><th scope="col">Fitur</th><th scope="col">Fungsi</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Start dan Login</th><td>Akses awal dan autentikasi pengguna.</td></tr>
+              <tr><th scope="row">Home</th><td>Menampilkan rekomendasi wisata pilihan.</td></tr>
+              <tr><th scope="row">Explore</th><td>Menjelajahi seluruh destinasi beserta tarif dan rating.</td></tr>
+              <tr><th scope="row">Profile</th><td>Data diri pengguna, informasi akun, dan riwayat pemesanan.</td></tr>
+              <tr><th scope="row">Check Out dan Order Now</th><td>Konfirmasi dan proses pemesanan tiket.</td></tr>
+              <tr><th scope="row">E-Tiket</th><td>Tiket digital sebagai bukti pemesanan.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="jarak-atas">Prototipe interaktif: <a href="https://www.figma.com/design/i08AZT79v2as5gPGBxrMdd/Untitled?node-id=1-2&amp;t=PJ6T4O0vR4tncxy9-1" target="_blank" rel="noopener">buka di Figma</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <p class="brand brand-footer">Wakaloka</p>
+        <p>Explore Wakatobi, Support Local.</p>
+      </div>
+      <div>
+        <p>Kelompok 8 &ndash; Program Studi Teknik Informatika</p>
+        <p>Universitas Pancasila, 2026</p>
+        <p>Mata kuliah Desain Web &ndash; <a href="profil.html#tim">lihat anggota tim</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
