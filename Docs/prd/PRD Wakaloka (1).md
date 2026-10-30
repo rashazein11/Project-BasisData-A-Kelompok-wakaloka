@@ -19,11 +19,11 @@ Disusun oleh:  Kelompok \- 1
 | Atribut | Nilai |
 | :---- | :---- |
 | Nama Produk | Wakaloka |
-| Versi Dokumen | 1.0 (Draft) |
-| Tanggal | 27 Oktober 2026 |
+| Versi Dokumen | 1.1 (Draft) |
+| Tanggal | 30 Oktober 2026 |
 | Jenis Produk | Website pemesanan tiket wisata Kabupaten Wakatobi yang digabung dengan produk UMKM lokal |
 | Status Saat Ini | Website statis 4 halaman (Beranda, Profil, Galeri, Data) sudah selesai |
-| Platform | Web (desktop dan mobile browser) |
+| Platform | Web (desktop dan mobile browser); frontend dan backend dipisah, terhubung lewat REST API |
 | Referensi | Struktur PRD InahuyShop (kelompok), diagram Use Case, Class, Sequence, dan ERD Chen Wakaloka, serta tangkapan layar website statis |
 
 ## **2\. Ringkasan Eksekutif**
@@ -65,7 +65,7 @@ Saat ini Wakaloka baru berupa website statis yang menampilkan profil, galeri, da
 | Peran | Deskripsi | Use Case Utama |
 | :---- | :---- | :---- |
 | Wisatawan | Wisatawan dari Indonesia yang ingin berkunjung ke tempat wisata lokal di Wakatobi | Login, lihat rekomendasi, jelajahi wisata, lihat detail, pesan tiket, tambah produk UMKM, lihat ringkasan pembayaran, lihat e-ticket, lihat riwayat |
-| Petugas Loket | Petugas di lokasi wisata yang memeriksa e-ticket | Validasi tiket berdasarkan ID tiket |
+| Petugas Loket | Petugas di lokasi wisata yang memeriksa e-ticket; ditandai role petugas pada data PENGGUNA | Login, validasi tiket berdasarkan ID tiket |
 
 Pelaku UMKM belum memiliki akun sendiri pada cakupan ini. Data produk UMKM disiapkan oleh tim dan ditampilkan bersama destinasi terkait.
 
@@ -90,7 +90,8 @@ Pelaku UMKM belum memiliki akun sendiri pada cakupan ini. Data produk UMKM disia
 * Pengiriman produk UMKM ke luar Wakatobi (produk diambil di destinasi).  
 * Multi-bahasa dan multi-mata uang.  
 * Notifikasi email atau WhatsApp.  
-* Aplikasi native Android dan iOS.
+* Aplikasi native Android dan iOS.  
+* Pendaftaran akun mandiri (akun Wisatawan dan Petugas Loket disiapkan tim sebagai data awal atau seed, lihat D-09).
 
 ## **7\. Kondisi Saat Ini (Baseline Website Statis)**
 
@@ -163,7 +164,7 @@ Paket Tomia Puncak Khayangan untuk 1 orang, jadwal 25 April 2026, berlaku hingga
 ### **Fase 3 – Backend dan Database**
 
 * Tujuan: data pengguna, pemesanan, dan tiket tersimpan permanen serta perhitungan dilakukan di server.  
-* Pekerjaan: merancang database sesuai ERD (bagian 12), autentikasi (hash password), endpoint wisata, pemesanan, dan tiket, serta pembuatan ID tiket unik.  
+* Pekerjaan: merancang database SQLite sesuai ERD (bagian 12), REST API terpisah dari frontend (bagian 13.5), autentikasi (hash password dan token), endpoint wisata, pemesanan, dan tiket, pembuatan ID tiket unik, serta dokumentasi API.  
 * Kriteria selesai: seluruh fungsi Fase 2 memakai data dari server; total dan masa berlaku dihitung di server.
 
 ### **Fase 4 – Petugas Loket dan Riwayat**
@@ -196,7 +197,8 @@ P0 adalah wajib untuk rilis utama. P1 penting dan dikerjakan setelah P0 selesai.
 | FR-10 | Halaman terima kasih | P1 | 2 | Tombol Kembali ke Beranda berfungsi |
 | FR-11 | Riwayat pemesanan | P1 | 4 | Pengguna hanya melihat pesanannya sendiri |
 | FR-12 | Profile pengguna | P1 | 4 | Menampilkan data diri dan informasi akun |
-| FR-13 | Validasi tiket oleh petugas loket | P0 | 4 | ID tiket valid dan belum dipakai diterima, lalu berstatus terpakai; tiket kedaluwarsa atau sudah terpakai ditolak |
+| FR-13 | Validasi tiket oleh petugas loket | P0 | 4 | Hanya pengguna ber-role petugas yang dapat memvalidasi; ID tiket valid dan belum dipakai diterima, lalu berstatus terpakai; tiket kedaluwarsa atau sudah terpakai ditolak |
+| FR-14 | Dokumentasi API | P0 | 3 | Seluruh endpoint (bagian 13.5) terdokumentasi dengan contoh permintaan dan respons dan dapat dicoba dari halaman dokumentasi |
 
 ## **10\. Aturan Bisnis**
 
@@ -205,11 +207,13 @@ P0 adalah wajib untuk rilis utama. P1 penting dan dikerjakan setelah P0 selesai.
 | BR-01 | Satu pemesanan berlaku untuk satu destinasi wisata. |
 | BR-02 | Produk UMKM yang ditawarkan terikat pada destinasi yang sama dengan tiket. |
 | BR-03 | Total pembayaran \= (harga tiket × jumlah orang) \+ jumlah seluruh (harga produk UMKM × jumlah produk). |
-| BR-04 | Masa berlaku tiket dihitung dari tanggal kunjungan; berdasarkan contoh pesanan, tiket berlaku 7 hari (25 April sampai 2 Mei) dan tidak berlaku setelah tanggal tersebut. |
+| BR-04 | Masa berlaku tiket dihitung dari tanggal kunjungan; berdasarkan contoh pesanan, tiket berlaku 7 hari (25 April sampai 2 Mei) dan tidak berlaku setelah tanggal tersebut. Tanggal berakhir disimpan pada tiket (tgl\_berlaku). |
 | BR-05 | Setiap tiket memiliki ID tiket unik yang ditunjukkan ke petugas loket. |
 | BR-06 | Tiket hanya dapat divalidasi satu kali. |
 | BR-07 | Pembayaran bersifat ringkasan atau simulasi, tanpa payment gateway. |
 | BR-08 | Pengguna hanya dapat melihat pesanan dan tiket miliknya sendiri. |
+| BR-09 | Harga tiket dan harga produk UMKM disalin ke pesanan saat dipesan (harga\_tiket, harga\_satuan), dan total disimpan, sehingga riwayat tidak berubah jika harga diubah kemudian. |
+| BR-10 | Hanya pengguna dengan role petugas yang dapat memvalidasi tiket. |
 
 ## **11\. Alur Pengguna Utama**
 
@@ -230,14 +234,14 @@ Model data mengikuti ERD Chen Wakaloka dengan lima entitas dan satu tabel detail
 
 | Entitas | Atribut | Keterangan |
 | :---- | :---- | :---- |
-| PENGGUNA | id\_pengguna (PK), nama, email, no\_telp, password | Satu pengguna dapat membuat banyak pemesanan |
+| PENGGUNA | id\_pengguna (PK), nama, email, no\_telp, password, role | Satu pengguna dapat membuat banyak pemesanan; role: wisatawan atau petugas |
 | WISATA | id\_wisata (PK), nama\_wisata, deskripsi, harga\_tiket, rating, foto | Satu wisata dapat dipesan berkali-kali dan menjual banyak produk UMKM |
-| PEMESANAN | id\_pemesanan (PK), id\_pengguna (FK), id\_wisata (FK), tgl\_pesan, tgl\_kunjungan, jumlah\_orang | Satu pemesanan menghasilkan satu tiket |
-| TIKET | id\_tiket (PK), id\_pemesanan (FK), status\_tiket | Status usulan: aktif, terpakai, kedaluwarsa |
+| PEMESANAN | id\_pemesanan (PK), id\_pengguna (FK), id\_wisata (FK), tgl\_pesan, tgl\_kunjungan, jumlah\_orang, harga\_tiket, total | Satu pemesanan menghasilkan satu tiket |
+| TIKET | id\_tiket (PK), id\_pemesanan (FK), status\_tiket, tgl\_berlaku | Status usulan: aktif, terpakai, kedaluwarsa |
 | PRODUK\_UMKM | id\_produk (PK), id\_wisata (FK), nama\_produk, harga, foto | Terikat pada satu wisata |
-| DETAIL\_PRODUK\_PESANAN | id\_pemesanan (FK), id\_produk (FK), jumlah | Menghubungkan pemesanan dan produk UMKM (relasi M:N) |
+| DETAIL\_PRODUK\_PESANAN | id\_pemesanan (FK), id\_produk (FK), jumlah, harga\_satuan | Menghubungkan pemesanan dan produk UMKM (relasi M:N) |
 
-Catatan kelas: Pemesanan memiliki operasi hitungTotal(), hitungMasaBerlaku(), dan konfirmasi(); Tiket memiliki tampilkanETiket() dan validasi(). Nilai total dan masa berlaku dihitung dan divalidasi di sisi server pada Fase 3\.
+Catatan kelas: Pemesanan memiliki operasi hitungTotal(), hitungMasaBerlaku(), dan konfirmasi(); Tiket memiliki tampilkanETiket() dan validasi(); Pengguna memiliki validasiTiket() yang hanya berlaku untuk role petugas. Nilai total dan masa berlaku dihitung dan divalidasi di sisi server pada Fase 3\.
 
 ## **13\. Persyaratan Non-Fungsional**
 
@@ -258,26 +262,51 @@ Catatan kelas: Pemesanan memiliki operasi hitungTotal(), hitungMasaBerlaku(), da
 
 * Password disimpan sebagai hash, bukan teks biasa.  
 * Query database menggunakan parameterized query; output teks dikodekan untuk mencegah XSS.  
-* Otorisasi dan perhitungan total dilakukan di server.  
+* Otorisasi (berdasarkan role dan pemilik data) dan perhitungan total dilakukan di server.  
+* Input dari frontend divalidasi di server; header keamanan dasar dipasang; percobaan login dibatasi.  
 * Data pribadi hanya dapat diakses oleh pemiliknya.
 
 ### **13.4 Teknologi yang Digunakan**
 
-Pilihan ini dibuat paling sederhana: satu bahasa (JavaScript) dari halaman web sampai server, dan tanpa instalasi database terpisah.
+Pilihan ini dibuat paling sederhana: satu bahasa (JavaScript) dari halaman web sampai server, frontend dan backend dipisah sesuai arahan dosen, dan tanpa instalasi database terpisah.
 
 | Lapisan | Pilihan | Alasan |
 | :---- | :---- | :---- |
-| Tampilan | HTML5, CSS3, JavaScript biasa. | Sudah dipakai pada website statis; tidak perlu build tool |
-| Font dan desain | Poppins lokal dan palet warna Profil | Sudah ada dan konsisten |
+| Arsitektur | Frontend dan backend dipisah (dua folder atau repositori), berkomunikasi lewat REST API berformat JSON | Arahan dari asiten dosen; perubahan backend tidak memaksa frontend berubah selama endpoint tetap |
+| Tampilan (frontend) | HTML5, CSS3, JavaScript biasa; data diambil dengan fetch ke API | Sudah dipakai pada website statis; tidak perlu build tool |
+| Font dan desain | Poppins lokal dan palet warna Profil | Sudah ada dan konsisten; mengikuti desain Figma |
 | Data Fase 1 dan 2 | File JSON dan localStorage browser | Prototipe berjalan tanpa server |
-| Backend (Fase 3\) | Node.js dengan Express | Bahasa sama dengan tampilan, mudah dipelajari |
-| Database (Fase 3\) | Mysql | Skema ERD yang sama dapat dipindah ke MySQL |
-| Autentikasi | bcryptjs dan express-session | Password ter-hash dan sesi login sederhana |
+| Backend (Fase 3) | Node.js dengan Express (REST API) | Bahasa sama dengan tampilan; bukan PHP sesuai arahan asisten dosen |
+| Database (Fase 3) | SQLite dengan better-sqlite3 | Satu file, tanpa instalasi server database; sintaks query hampir sama dengan MySQL |
+| Autentikasi | bcryptjs (hash password) dan jsonwebtoken (token di header Authorization) | Cocok untuk frontend dan backend terpisah; tanpa cookie lintas alamat |
+| Validasi input | zod | Pesan error jelas; pemeriksaan dilakukan di server |
+| Konfigurasi dan keamanan | dotenv, helmet, cors, express-rate-limit | Rahasia di luar kode; header aman; hanya frontend sendiri yang boleh memanggil API; login dibatasi |
 | ID tiket unik | crypto.randomUUID() bawaan Node.js | Tanpa library tambahan |
-| Alat kerja | VS Code dengan Live Server, Git dan GitHub, Lighthouse di Chrome | Gratis dan umum dipakai |
-| Hosting (usulan) | GitHub Pages untuk Fase 1 dan 2, layanan hosting Node.js gratis untuk Fase 3 | Cek ketentuan layanan terbaru sebelum dipakai |
+| Dokumentasi API | OpenAPI dengan swagger-ui-express | Diminta dosen; endpoint dapat dicoba langsung |
+| Kolaborasi | Git dan GitHub: branch dan pull request per anggota | Kontribusi tiap anggota terlihat dan memengaruhi penilaian |
+| Alat kerja | VS Code dengan Live Server, Lighthouse di Chrome | Gratis dan umum dipakai |
+| Hosting (usulan) | Frontend di GitHub Pages; backend di layanan hosting Node.js gratis | Cek ketentuan layanan terbaru; SQLite membutuhkan penyimpanan file yang menetap |
 
-PRD kelompok memakai React, Vite, dan MySQL. Pilihan tersebut tidak diambil karena memerlukan build tool dan waktu belajar tambahan; Wakaloka dapat dipindah ke sana nanti tanpa mengubah alur dan ERD.
+PRD kelompok memakai React, Vite, dan MySQL. Pilihan tersebut tidak diambil karena memerlukan build tool dan waktu belajar tambahan; Wakaloka dapat dipindah ke sana nanti tanpa mengubah alur dan ERD (skema SQLite dapat dipindah ke MySQL dengan perubahan kecil pada tipe data dan fungsi tanggal).
+
+### **13.5 Arsitektur dan Kolaborasi**
+
+* Frontend hanya mengenal alamat endpoint; seluruh perhitungan total, masa berlaku, dan otorisasi ada di backend.  
+* Setiap anggota bekerja pada branch sendiri dan menggabungkan perubahan lewat pull request; riwayat pull request menjadi bukti kontribusi.  
+* Dokumentasi API diperbarui pada pull request yang mengubah endpoint.
+
+Daftar endpoint (usulan, dapat disesuaikan saat implementasi):
+
+| Metode dan Path | Akses | Fungsi |
+| :---- | :---- | :---- |
+| POST /api/auth/login | Publik | Masuk; mengembalikan token dan role |
+| GET /api/destinations | Publik | Daftar enam destinasi beserta tarif dan rating |
+| GET /api/destinations/:id | Publik | Detail destinasi dan produk UMKM-nya |
+| POST /api/orders | Wisatawan | Buat pesanan; server menghitung total dan membuat tiket |
+| GET /api/me/orders | Wisatawan | Riwayat pesanan milik sendiri |
+| GET /api/me/tickets | Wisatawan | Tiket milik sendiri |
+| GET /api/staff/tickets/:id | Petugas | Cari tiket berdasarkan ID tanpa mengubah status |
+| POST /api/staff/tickets/:id/validate | Petugas | Validasi satu kali (atomik); tiket berstatus terpakai |
 
 ## **14\. Pengujian**
 
@@ -286,11 +315,13 @@ PRD kelompok memakai React, Vite, dan MySQL. Pilihan tersebut tidak diambil kare
 * Uji hitung total menggunakan contoh pesanan Rp 215.000 dan minimal dua skenario lain.  
 * Uji masa berlaku: tiket pada hari terakhir berlaku diterima dan sehari setelahnya ditolak.  
 * Uji validasi: tiket yang sama tidak dapat divalidasi dua kali.  
+* Uji otorisasi: pengguna ber-role wisatawan ditolak saat memanggil endpoint petugas, dan pengguna tidak dapat melihat pesanan milik orang lain.  
+* Uji dokumentasi API: setiap endpoint pada bagian 13.5 dapat dicoba dari halaman dokumentasi.  
 * Uji tampilan di desktop dan mobile serta uji aksesibilitas dengan Lighthouse dan keyboard.
 
 ## **15\. Definisi Selesai**
 
-Sebuah fitur dinyatakan selesai apabila acceptance criteria terpenuhi, pengujian yang relevan lulus, tampilan konsisten dengan palet dan tipografi, tidak ada error pada console browser, dan dokumentasi (PRD serta diagram) diperbarui jika ada perubahan alur atau data.
+Sebuah fitur dinyatakan selesai apabila acceptance criteria terpenuhi, pengujian yang relevan lulus, tampilan konsisten dengan palet dan tipografi, tidak ada error pada console browser, dan dokumentasi (PRD serta diagram) diperbarui jika ada perubahan alur atau data; untuk fitur backend, dokumentasi API ikut diperbarui dan perubahan masuk lewat pull request.
 
 ## **16\. Risiko dan Mitigasi**
 
@@ -302,6 +333,7 @@ Sebuah fitur dinyatakan selesai apabila acceptance criteria terpenuhi, pengujian
 | Cakupan terlalu besar untuk waktu perkuliahan | Sedang | Kerjakan per fase; P1 ditunda jika waktu tidak cukup |
 | Foto berukuran besar memperlambat halaman | Sedang | Kompresi gambar dan ukuran sesuai tampilan |
 | Produk UMKM belum tersedia untuk semua destinasi | Rendah | Tampilkan keterangan belum tersedia |
+| Kontribusi anggota tidak merata atau tidak terlihat | Tinggi | Pembagian tugas per fase dan pull request per anggota |
 
 ## **17\. Keputusan dan Pertanyaan Terbuka**
 
@@ -310,13 +342,17 @@ Sebuah fitur dinyatakan selesai apabila acceptance criteria terpenuhi, pengujian
 | D-01 | Fokus pemesanan satu destinasi per pesanan | Usulan |
 | D-02 | Pembayaran berupa ringkasan atau simulasi | Usulan |
 | D-03 | Masa berlaku tiket 7 hari sejak tanggal kunjungan | Perlu dikonfirmasi |
-| D-04 | Teknologi yang digunakan: HTML, CSS, JavaScript, Node.js \+ Express, dan SQLite (lihat bagian 13.4) | Usulan |
+| D-04 | Teknologi yang digunakan: HTML, CSS, JavaScript, Node.js \+ Express, dan SQLite (lihat bagian 13.4) | Diputuskan: SQLite |
 | D-05 | Footer menulis Kelompok 8 pada Beranda dan Galeri, tetapi Kelompok 1 pada Profil dan Data | Perlu disamakan |
 | D-06 | Alur pada halaman Data menyebut 2 rekomendasi di Home, sedangkan Beranda menampilkan 3 | Perlu disamakan |
 | D-07 | Harga tiket Pantai Pulau Anano Rp 159.000 jauh di atas destinasi lain | Perlu diperiksa |
 | D-08 | Daftar anggota dan peran kelompok (Profil) menjadi acuan penanggung jawab tiap fase | Usulan |
+| D-09 | Akun Wisatawan dan Petugas Loket dibuat tim sebagai data awal (tanpa halaman daftar), sesuai desain Figma | Perlu dikonfirmasi ke dosen |
+| D-10 | Frontend dan backend dipisah dengan REST API, dilengkapi dokumentasi API dan pull request per anggota | Diputuskan (arahan dosen) |
+| D-11 | Login memakai token di header Authorization, bukan cookie sesi | Usulan |
 
 ## **18\. Referensi**
 
 * Use Case Diagram, Class Diagram, Sequence Diagram, dan ERD (notasi Chen) Wakaloka  
-* Website statis Wakaloka: Beranda, Profil, Galeri, Data
+* Website statis Wakaloka: Beranda, Profil, Galeri, Data  
+* Arahan dosen: frontend dan backend terpisah (REST API), dokumentasi API, kontribusi per anggota lewat pull request, bahasa pemrograman bebas selain PHP, dan program menyesuaikan Figma
