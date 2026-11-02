@@ -89,7 +89,11 @@ Project-BasisData-A-Kelompok-wakaloka/
     │   ├── erd/                       ERD notasi Chen (.drawio)
     │   ├── uml/                       Use Case, Class, dan Sequence Diagram (.drawio)
     │   └── pdf/                       versi PDF dari PRD, ERD, dan UML
-    └── docs_pdf_tim/                  salinan PDF dokumen dari anggota tim
+    ├── docs_pdf_tim/                  salinan PDF dokumen dari anggota tim
+    └── figma-wakaloka/                dokumentasi desain UI/UX
+        ├── README.md                  panduan dan link desain Figma
+        ├── 01 Start.png – 22 Panduan implementasi.png
+        └── Asset.png                  aset navigasi bawah
 ```
 
 ## Menjalankan
