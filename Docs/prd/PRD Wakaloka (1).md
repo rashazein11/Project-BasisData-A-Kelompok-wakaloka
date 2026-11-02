@@ -19,18 +19,18 @@ Disusun oleh:  Kelompok \- 1
 | Atribut | Nilai |
 | :---- | :---- |
 | Nama Produk | Wakaloka |
-| Versi Dokumen | 1.1 (Draft) |
-| Tanggal | 30 Oktober 2026 |
+| Versi Dokumen | 1.3 (Draft) |
+| Tanggal | 31 Oktober 2026 |
 | Jenis Produk | Website pemesanan tiket wisata Kabupaten Wakatobi yang digabung dengan produk UMKM lokal |
-| Status Saat Ini | Website statis 4 halaman (Beranda, Profil, Galeri, Data) sudah selesai |
-| Platform | Web (desktop dan mobile browser); frontend dan backend dipisah, terhubung lewat REST API |
+| Status Saat Ini | Website statis 4 halaman (Beranda, Profil, Galeri, Data) sudah selesai; pada desain baru halaman Profil tidak dibawa (lihat D-13) |
+| Platform | Web (desktop dan mobile browser) dan aplikasi mobile Android/iOS; frontend, aplikasi mobile, dan backend dipisah, terhubung lewat REST API yang sama |
 | Referensi | Struktur PRD InahuyShop (kelompok), diagram Use Case, Class, Sequence, dan ERD Chen Wakaloka, serta tangkapan layar website statis |
 
 ## **2\. Ringkasan Eksekutif**
 
 Wakaloka adalah website pemesanan tiket wisata di Kabupaten Wakatobi. Wisatawan memesan tiket secara online, lalu cukup menunjukkan ID e-ticket kepada petugas loket. Setiap tiket dapat digabung dengan produk UMKM lokal di destinasi yang sama, misalnya Tenun Gelo, sehingga perjalanan wisatawan ikut menggerakkan ekonomi daerah.
 
-Saat ini Wakaloka baru berupa website statis yang menampilkan profil, galeri, dan data tarif. PRD ini menetapkan kebutuhan produk dan tahapan pengembangan untuk mengubahnya menjadi alur pemesanan yang utuh: Start, Login, Home, Explore, detail wisata, Check Out, E-Tiket, dan halaman terima kasih.
+Saat ini Wakaloka baru berupa website statis yang menampilkan profil, galeri, dan data tarif. PRD ini menetapkan kebutuhan produk dan tahapan pengembangan untuk mengubahnya menjadi alur pemesanan yang utuh: Start, Login, Daftar, Home, Explore, detail wisata, Check Out, E-Tiket, dan halaman terima kasih.
 
 ## **3\. Latar Belakang dan Masalah**
 
@@ -64,8 +64,8 @@ Saat ini Wakaloka baru berupa website statis yang menampilkan profil, galeri, da
 
 | Peran | Deskripsi | Use Case Utama |
 | :---- | :---- | :---- |
-| Wisatawan | Wisatawan dari Indonesia yang ingin berkunjung ke tempat wisata lokal di Wakatobi | Login, lihat rekomendasi, jelajahi wisata, lihat detail, pesan tiket, tambah produk UMKM, lihat ringkasan pembayaran, lihat e-ticket, lihat riwayat |
-| Petugas Loket | Petugas di lokasi wisata yang memeriksa e-ticket; ditandai role petugas pada data PENGGUNA | Login, validasi tiket berdasarkan ID tiket |
+| Wisatawan | Wisatawan dari Indonesia yang ingin berkunjung ke tempat wisata lokal di Wakatobi | Daftar, login, lihat rekomendasi, jelajahi wisata, lihat detail, pesan tiket, tambah produk UMKM, lihat ringkasan pembayaran, lihat e-ticket, lihat riwayat |
+| Petugas Loket | Petugas di lokasi wisata yang memeriksa e-ticket; ditandai role petugas pada data PENGGUNA | Daftar, login, validasi tiket berdasarkan ID tiket |
 
 Pelaku UMKM belum memiliki akun sendiri pada cakupan ini. Data produk UMKM disiapkan oleh tim dan ditampilkan bersama destinasi terkait.
 
@@ -73,14 +73,15 @@ Pelaku UMKM belum memiliki akun sendiri pada cakupan ini. Data produk UMKM disia
 
 ### **6.1 Termasuk dalam Cakupan**
 
-* Halaman informasi: Beranda, Profil (konsep sistem, warna, tipografi, tim), Galeri, dan Data.  
-* Login pengguna.  
+* Halaman informasi: Beranda, Galeri, dan Data. Halaman Profil situs statis tidak dibawa ke desain baru; konsep warna dan tipografi dicatat pada bagian 13.1.  
+* Pendaftaran akun (Wisatawan dan Petugas Loket) dan login pengguna.  
 * Rekomendasi dan daftar enam destinasi beserta tarif dan rating.  
 * Detail wisata dan produk UMKM yang ditawarkan di destinasi tersebut.  
 * Pemesanan tiket (tanggal kunjungan, jumlah orang), penambahan produk UMKM, dan ringkasan pembayaran.  
 * E-ticket dengan ID tiket dan masa berlaku.  
 * Riwayat pemesanan dan profil pengguna.  
-* Validasi tiket oleh petugas loket.
+* Validasi tiket oleh petugas loket.  
+* Aplikasi mobile Android dan iOS (React Native dengan Expo) untuk alur utama: jelajah, detail, pemesanan, e-tiket, riwayat, akun, dan validasi petugas; memakai backend yang sama dengan website.
 
 ### **6.2 Di Luar Cakupan**
 
@@ -90,8 +91,7 @@ Pelaku UMKM belum memiliki akun sendiri pada cakupan ini. Data produk UMKM disia
 * Pengiriman produk UMKM ke luar Wakatobi (produk diambil di destinasi).  
 * Multi-bahasa dan multi-mata uang.  
 * Notifikasi email atau WhatsApp.  
-* Aplikasi native Android dan iOS.  
-* Pendaftaran akun mandiri (akun Wisatawan dan Petugas Loket disiapkan tim sebagai data awal atau seed, lihat D-09).
+* Publikasi aplikasi mobile ke Play Store atau App Store (aplikasi dijalankan lewat Expo Go atau build pengembangan).
 
 ## **7\. Kondisi Saat Ini (Baseline Website Statis)**
 
@@ -110,7 +110,7 @@ Pelaku UMKM belum memiliki akun sendiri pada cakupan ini. Data produk UMKM disia
 | :---- | :---- | :---- |
 | Tomia Puncak Khayangan | Rp 25.000 | 5,0 |
 | Mangrove Sombano | Rp 25.000 | 4,7 |
-| Pantai Pulau Anano | Rp 159.000 | 5,0 |
+| Pantai Pulau Anano | Rp 59.000 | 5,0 |
 | Pulau Binongko | Rp 50.000 | 5,0 |
 | Pulau Hoga | Rp 150.000 | 5,0 |
 | Goa Kontamale | Rp 20.000 | 4,8 |
@@ -139,10 +139,11 @@ Paket Tomia Puncak Khayangan untuk 1 orang, jadwal 25 April 2026, berlaku hingga
 | :---- | :---- | :---- | :---- |
 | 0 | Website statis | 4 halaman informasi | Selesai |
 | 1 | Perapian konten dan data | Data destinasi dan UMKM terpusat, konten konsisten | Berikutnya |
-| 2 | Alur pemesanan prototipe | Start, Login, Home, Explore, Detail, Check Out, E-Tiket, Terima kasih | Direncanakan |
+| 2 | Alur pemesanan prototipe | Start, Login, Daftar, Home, Explore, Detail, Check Out, E-Tiket, Terima kasih | Direncanakan |
 | 3 | Backend dan database | Data tersimpan, akun, pemesanan, tiket | Direncanakan |
 | 4 | Petugas loket dan riwayat | Validasi tiket, riwayat, profil | Direncanakan |
 | 5 | Pengujian dan rilis | Uji fungsional, aksesibilitas, performa, publikasi | Direncanakan |
+| 6 | Aplikasi mobile | Aplikasi Android/iOS (React Native, Expo) dengan backend yang sama | Versi awal selesai |
 
 ### **Fase 0 – Website Statis (Selesai)**
 
@@ -158,7 +159,7 @@ Paket Tomia Puncak Khayangan untuk 1 orang, jadwal 25 April 2026, berlaku hingga
 ### **Fase 2 – Alur Pemesanan Prototipe**
 
 * Tujuan: pengguna dapat menjalankan pemesanan dari awal sampai E-Tiket di browser.  
-* Pekerjaan: halaman Start, Login, Home (rekomendasi), Explore (6 destinasi), Detail wisata (rating, tarif, produk UMKM), Check Out (tanggal kunjungan, jumlah orang, produk UMKM, ringkasan pembayaran, tombol Order Now), E-Tiket (ID tiket), dan Terima kasih (kembali ke Beranda).  
+* Pekerjaan: frontend disusun sebagai komponen React yang dipakai ulang (header, footer, kartu destinasi, kolom formulir, stepper jumlah); halaman Start, Login, Daftar, Home (rekomendasi), Explore (6 destinasi), Detail wisata (rating, tarif, produk UMKM), Check Out (tanggal kunjungan, jumlah orang, produk UMKM, ringkasan pembayaran, tombol Order Now), E-Tiket (ID tiket), dan Terima kasih (kembali ke Beranda).  
 * Kriteria selesai: contoh pesanan pada bagian 7.3 menghasilkan total Rp 215.000 dan e-ticket dengan masa berlaku hingga 2 Mei 2026; alur dapat dijalankan tanpa error di desktop dan mobile.
 
 ### **Fase 3 – Backend dan Database**
@@ -179,13 +180,19 @@ Paket Tomia Puncak Khayangan untuk 1 orang, jadwal 25 April 2026, berlaku hingga
 * Pekerjaan: uji fungsional seluruh alur, uji aksesibilitas dan performa, perbaikan temuan, dan publikasi.  
 * Kriteria selesai: seluruh acceptance criteria P0 lulus dan definisi selesai (bagian 15\) terpenuhi.
 
+### **Fase 6 – Aplikasi Mobile**
+
+* Tujuan: pengguna dapat menjalankan alur utama dari aplikasi di Android atau iOS, tidak hanya dari browser.  
+* Pekerjaan: aplikasi React Native dengan Expo pada folder `mobile`; layar dan komponen disusun sejajar dengan versi web (satu `api.js` untuk memanggil backend, komponen bersama, satu layar per kebutuhan); token disimpan di penyimpanan aman perangkat.  
+* Kriteria selesai: alur daftar, login, pesan, e-tiket, riwayat, dan validasi petugas berjalan tanpa error; total pesanan sama dengan versi web karena dihitung di server.
+
 ## **9\. Persyaratan Fungsional**
 
 P0 adalah wajib untuk rilis utama. P1 penting dan dikerjakan setelah P0 selesai.
 
 | ID | Fitur | Prioritas | Fase | Acceptance Criteria |
 | :---- | :---- | :---- | :---- | :---- |
-| FR-01 | Halaman informasi (Beranda, Profil, Galeri, Data) | P0 | 0 | Empat halaman tampil dengan navigasi dan footer yang sama |
+| FR-01 | Halaman informasi (Beranda, Galeri, Data) | P0 | 0 | Tiga halaman tampil dengan navigasi dan footer yang sama |
 | FR-02 | Login | P0 | 2, 3 | Masuk dengan email atau nomor telepon dan password; pesan gagal tidak membocorkan data akun |
 | FR-03 | Rekomendasi wisata (Home) | P0 | 2 | Menampilkan rekomendasi destinasi dengan tombol View, Explore, dan Profile |
 | FR-04 | Jelajah wisata (Explore) | P0 | 2 | Menampilkan enam destinasi dengan tarif, rating, dan tombol View |
@@ -198,7 +205,9 @@ P0 adalah wajib untuk rilis utama. P1 penting dan dikerjakan setelah P0 selesai.
 | FR-11 | Riwayat pemesanan | P1 | 4 | Pengguna hanya melihat pesanannya sendiri |
 | FR-12 | Profile pengguna | P1 | 4 | Menampilkan data diri dan informasi akun |
 | FR-13 | Validasi tiket oleh petugas loket | P0 | 4 | Hanya pengguna ber-role petugas yang dapat memvalidasi; ID tiket valid dan belum dipakai diterima, lalu berstatus terpakai; tiket kedaluwarsa atau sudah terpakai ditolak |
+| FR-15 | Daftar akun | P0 | 2, 3 | Pengguna mengisi nama, email, nomor telepon, kata sandi (minimal 8 karakter), dan peran; kode petugas wajib dan harus benar jika memilih Petugas Loket; email atau nomor telepon yang sudah dipakai ditolak dengan pesan jelas; setelah berhasil pengguna diarahkan ke Login |
 | FR-14 | Dokumentasi API | P0 | 3 | Seluruh endpoint (bagian 13.5) terdokumentasi dengan contoh permintaan dan respons dan dapat dicoba dari halaman dokumentasi |
+| FR-16 | Aplikasi mobile | P1 | 6 | Aplikasi berjalan di Android atau iOS dan menjalankan alur daftar, login, jelajah, pesan, e-tiket, riwayat, akun, dan validasi petugas memakai endpoint yang sama dengan website |
 
 ## **10\. Aturan Bisnis**
 
@@ -214,11 +223,13 @@ P0 adalah wajib untuk rilis utama. P1 penting dan dikerjakan setelah P0 selesai.
 | BR-08 | Pengguna hanya dapat melihat pesanan dan tiket miliknya sendiri. |
 | BR-09 | Harga tiket dan harga produk UMKM disalin ke pesanan saat dipesan (harga\_tiket, harga\_satuan), dan total disimpan, sehingga riwayat tidak berubah jika harga diubah kemudian. |
 | BR-10 | Hanya pengguna dengan role petugas yang dapat memvalidasi tiket. |
+| BR-11 | Email dan nomor telepon unik; kata sandi minimal 8 karakter dan disimpan sebagai hash. |
+| BR-12 | Pendaftaran dengan peran petugas hanya berhasil jika kode petugas benar; pendaftaran wisatawan tidak memerlukan kode. |
 
 ## **11\. Alur Pengguna Utama**
 
 1. Halaman Awal: tombol Start memulai aplikasi.  
-2. Login: masuk dengan email atau nomor telepon dan password.  
+2. Login: masuk dengan email atau nomor telepon dan password. Pengguna baru memilih Daftar terlebih dahulu, lalu kembali ke Login.  
 3. Home: rekomendasi wisata, tombol View, Explore, dan Profile.  
 4. Explore: enam pilihan wisata dengan tombol View.  
 5. Profil wisata: detail destinasi dan produk UMKM, tombol Check Out.  
@@ -235,7 +246,7 @@ Model data mengikuti ERD Chen Wakaloka dengan lima entitas dan satu tabel detail
 | Entitas | Atribut | Keterangan |
 | :---- | :---- | :---- |
 | PENGGUNA | id\_pengguna (PK), nama, email, no\_telp, password, role | Satu pengguna dapat membuat banyak pemesanan; role: wisatawan atau petugas |
-| WISATA | id\_wisata (PK), nama\_wisata, deskripsi, harga\_tiket, rating, foto | Satu wisata dapat dipesan berkali-kali dan menjual banyak produk UMKM |
+| WISATA | id\_wisata (PK), nama\_wisata, kategori, deskripsi, harga\_tiket, rating, foto | Satu wisata dapat dipesan berkali-kali dan menjual banyak produk UMKM |
 | PEMESANAN | id\_pemesanan (PK), id\_pengguna (FK), id\_wisata (FK), tgl\_pesan, tgl\_kunjungan, jumlah\_orang, harga\_tiket, total | Satu pemesanan menghasilkan satu tiket |
 | TIKET | id\_tiket (PK), id\_pemesanan (FK), status\_tiket, tgl\_berlaku | Status usulan: aktif, terpakai, kedaluwarsa |
 | PRODUK\_UMKM | id\_produk (PK), id\_wisata (FK), nama\_produk, harga, foto | Terikat pada satu wisata |
@@ -247,7 +258,7 @@ Catatan kelas: Pemesanan memiliki operasi hitungTotal(), hitungMasaBerlaku(), da
 
 ### **13.1 Desain dan Tipografi**
 
-* Palet warna mengikuti halaman Profil: Hijau \#8DA249, Jingga \#F89254, Biru \#7BADCA, Kuning \#FFDE59, dan Krem \#FBE1B5.  
+* Palet warna mengikuti desain Figma (Panduan implementasi): Hijau \#8DA249, Jingga \#F89254, Biru \#7BADCA, Kuning \#FFDE59, dan Krem \#FBE1B5.  
 * Poppins digunakan sebagai satu-satunya jenis font dan dimuat lokal dari folder assets/fonts.  
 * Bahasa antarmuka adalah Bahasa Indonesia; mata uang Rupiah (IDR) dengan format Rp 25.000.
 
@@ -255,6 +266,7 @@ Catatan kelas: Pemesanan memiliki operasi hitungTotal(), hitungMasaBerlaku(), da
 
 * Largest Contentful Paint maksimal 2,5 detik; gambar dikompresi dan memiliki ukuran yang sesuai.  
 * Tata letak responsif pada desktop dan mobile.  
+* Pada lebar HP, layar utama (Beranda, Jelajah, Galeri, Data, Tiket saya atau Validasi, Akun) memakai navigasi bawah berisi ikon dan label dengan penanda tab aktif, sesuai komponen "Tab bawah" di Figma; di lebar desktop navigasi tetap di atas.  
 * Semua gambar memiliki teks alternatif; kontras teks memenuhi WCAG 2.1 AA; seluruh alur dapat digunakan dengan keyboard dengan fokus yang terlihat.  
 * Form menampilkan pesan error yang jelas.
 
@@ -268,13 +280,14 @@ Catatan kelas: Pemesanan memiliki operasi hitungTotal(), hitungMasaBerlaku(), da
 
 ### **13.4 Teknologi yang Digunakan**
 
-Pilihan ini dibuat paling sederhana: satu bahasa (JavaScript) dari halaman web sampai server, frontend dan backend dipisah sesuai arahan dosen, dan tanpa instalasi database terpisah.
+Pilihan ini dibuat paling sederhana: satu bahasa (JavaScript) dari halaman web sampai server, frontend dan backend dipisah sesuai arahan asisten dosen, frontend memakai React sesuai saran asisten dosen, dan tanpa instalasi database terpisah.
 
 | Lapisan | Pilihan | Alasan |
 | :---- | :---- | :---- |
-| Arsitektur | Frontend dan backend dipisah (dua folder atau repositori), berkomunikasi lewat REST API berformat JSON | Arahan dari asiten dosen; perubahan backend tidak memaksa frontend berubah selama endpoint tetap |
-| Tampilan (frontend) | HTML5, CSS3, JavaScript biasa; data diambil dengan fetch ke API | Sudah dipakai pada website statis; tidak perlu build tool |
-| Font dan desain | Poppins lokal dan palet warna Profil | Sudah ada dan konsisten; mengikuti desain Figma |
+| Arsitektur | Frontend dan backend dipisah (dua folder atau repositori), berkomunikasi lewat REST API berformat JSON | Arahan asisten dosen; perubahan backend tidak memaksa frontend berubah selama endpoint tetap |
+| Tampilan (frontend) | React 18 dengan Vite dan React Router (HashRouter); gaya memakai CSS biasa; data diambil dengan fetch ke API | Saran asisten dosen: komponen (header, footer, kartu destinasi, kolom formulir) ditulis sekali lalu dipakai ulang di banyak layar; Vite menjadi satu-satunya alat build |
+| Aplikasi mobile | React Native dengan Expo (Expo Go untuk menjalankan), React Navigation, expo-secure-store untuk token | Konsep sama dengan React di web (komponen, state, hook) sehingga mudah dijelaskan; satu kode berjalan di Android dan iOS; backend tidak berubah |
+| Font dan desain | Poppins lokal dan palet warna desain Figma | Sudah ada dan konsisten; mengikuti desain Figma |
 | Data Fase 1 dan 2 | File JSON dan localStorage browser | Prototipe berjalan tanpa server |
 | Backend (Fase 3) | Node.js dengan Express (REST API) | Bahasa sama dengan tampilan; bukan PHP sesuai arahan asisten dosen |
 | Database (Fase 3) | SQLite dengan better-sqlite3 | Satu file, tanpa instalasi server database; sintaks query hampir sama dengan MySQL |
@@ -282,15 +295,17 @@ Pilihan ini dibuat paling sederhana: satu bahasa (JavaScript) dari halaman web s
 | Validasi input | zod | Pesan error jelas; pemeriksaan dilakukan di server |
 | Konfigurasi dan keamanan | dotenv, helmet, cors, express-rate-limit | Rahasia di luar kode; header aman; hanya frontend sendiri yang boleh memanggil API; login dibatasi |
 | ID tiket unik | crypto.randomUUID() bawaan Node.js | Tanpa library tambahan |
-| Dokumentasi API | OpenAPI dengan swagger-ui-express | Diminta dosen; endpoint dapat dicoba langsung |
+| Dokumentasi API | OpenAPI dengan swagger-ui-express | Diminta asisten dosen; endpoint dapat dicoba langsung |
 | Kolaborasi | Git dan GitHub: branch dan pull request per anggota | Kontribusi tiap anggota terlihat dan memengaruhi penilaian |
-| Alat kerja | VS Code dengan Live Server, Lighthouse di Chrome | Gratis dan umum dipakai |
-| Hosting (usulan) | Frontend di GitHub Pages; backend di layanan hosting Node.js gratis | Cek ketentuan layanan terbaru; SQLite membutuhkan penyimpanan file yang menetap |
+| Alat kerja | VS Code, server pengembangan Vite (`npm run dev`), Lighthouse di Chrome | Gratis dan umum dipakai |
+| Hosting (usulan) | Frontend di GitHub Pages (isi folder `dist` hasil `npm run build`); backend di layanan hosting Node.js gratis | Cek ketentuan layanan terbaru; SQLite membutuhkan penyimpanan file yang menetap |
 
-PRD kelompok memakai React, Vite, dan MySQL. Pilihan tersebut tidak diambil karena memerlukan build tool dan waktu belajar tambahan; Wakaloka dapat dipindah ke sana nanti tanpa mengubah alur dan ERD (skema SQLite dapat dipindah ke MySQL dengan perubahan kecil pada tipe data dan fungsi tanggal).
+PRD kelompok (InahuyShop) memakai React, Vite, dan MySQL. Sejak versi 1.2 frontend Wakaloka juga memakai React dan Vite atas saran asisten dosen; satu-satunya perbedaan adalah database. SQLite tetap dipakai karena tanpa instalasi server, dan dapat dipindah ke MySQL nanti tanpa mengubah alur dan ERD (skema SQLite dapat dipindah ke MySQL dengan perubahan kecil pada tipe data dan fungsi tanggal).
 
 ### **13.5 Arsitektur dan Kolaborasi**
 
+* Tampilan disusun dari komponen React yang dipakai ulang; hanya satu modul (`api.js`) yang memanggil backend.  
+* Aplikasi mobile (`mobile/`) memakai endpoint dan aturan yang sama; hanya satu modul (`api.js`) yang memanggil backend, seperti di web.  
 * Frontend hanya mengenal alamat endpoint; seluruh perhitungan total, masa berlaku, dan otorisasi ada di backend.  
 * Setiap anggota bekerja pada branch sendiri dan menggabungkan perubahan lewat pull request; riwayat pull request menjadi bukti kontribusi.  
 * Dokumentasi API diperbarui pada pull request yang mengubah endpoint.
@@ -299,20 +314,24 @@ Daftar endpoint (usulan, dapat disesuaikan saat implementasi):
 
 | Metode dan Path | Akses | Fungsi |
 | :---- | :---- | :---- |
+| POST /api/auth/register | Publik | Daftar akun baru dengan peran wisatawan atau petugas (peran petugas memerlukan kode petugas) |
 | POST /api/auth/login | Publik | Masuk; mengembalikan token dan role |
 | GET /api/destinations | Publik | Daftar enam destinasi beserta tarif dan rating |
 | GET /api/destinations/:id | Publik | Detail destinasi dan produk UMKM-nya |
 | POST /api/orders | Wisatawan | Buat pesanan; server menghitung total dan membuat tiket |
 | GET /api/me/orders | Wisatawan | Riwayat pesanan milik sendiri |
-| GET /api/me/tickets | Wisatawan | Tiket milik sendiri |
+| GET /api/me/tickets | Wisatawan | Daftar tiket milik sendiri |
+| GET /api/me/tickets/:id | Wisatawan | E-tiket lengkap milik sendiri (404 jika bukan miliknya) |
 | GET /api/staff/tickets/:id | Petugas | Cari tiket berdasarkan ID tanpa mengubah status |
 | POST /api/staff/tickets/:id/validate | Petugas | Validasi satu kali (atomik); tiket berstatus terpakai |
 
 ## **14\. Pengujian**
 
+* Uji daftar akun: kode petugas salah ditolak, email atau nomor telepon ganda ditolak, kata sandi kurang dari 8 karakter ditolak, dan akun baru dapat login.  
 * Uji alur utama: login, pilih wisata, check out, order now, dan e-ticket.  
 * Uji percabangan: login gagal, produk UMKM tidak dipilih, dan jumlah orang tidak valid.  
 * Uji hitung total menggunakan contoh pesanan Rp 215.000 dan minimal dua skenario lain.  
+* Skenario uji total yang sudah digambarkan pada Figma (halaman Checkout A sampai I): A Tomia 1 orang + 1 Tenun Gelo = Rp 215.000; B Tomia 1 orang tanpa UMKM = Rp 25.000; C Tomia 2 orang + 1 Tenun Gelo = Rp 240.000; D Tomia 3 orang + 2 Tenun Gelo = Rp 455.000; E Mangrove Sombano 3 orang = Rp 75.000; F Pantai Pulau Anano 2 orang = Rp 118.000; G Pulau Binongko 5 orang = Rp 250.000; H Pulau Hoga 4 orang = Rp 600.000; I Goa Kontamale 2 orang = Rp 40.000.  
 * Uji masa berlaku: tiket pada hari terakhir berlaku diterima dan sehari setelahnya ditolak.  
 * Uji validasi: tiket yang sama tidak dapat divalidasi dua kali.  
 * Uji otorisasi: pengguna ber-role wisatawan ditolak saat memanggil endpoint petugas, dan pengguna tidak dapat melihat pesanan milik orang lain.  
@@ -334,6 +353,8 @@ Sebuah fitur dinyatakan selesai apabila acceptance criteria terpenuhi, pengujian
 | Foto berukuran besar memperlambat halaman | Sedang | Kompresi gambar dan ukuran sesuai tampilan |
 | Produk UMKM belum tersedia untuk semua destinasi | Rendah | Tampilkan keterangan belum tersedia |
 | Kontribusi anggota tidak merata atau tidak terlihat | Tinggi | Pembagian tugas per fase dan pull request per anggota |
+| Aplikasi mobile hanya bisa dicoba lewat Expo Go dan satu jaringan Wi-Fi dengan laptop | Rendah | Panduan menjalankan di README; alamat backend dapat diatur lewat `EXPO_PUBLIC_API_BASE` |
+| Waktu belajar React menambah beban anggota yang baru mengenal framework | Sedang | Mulai dari komponen kecil (kartu destinasi, kolom formulir); seluruh logika bisnis tetap di backend yang tidak berubah |
 
 ## **17\. Keputusan dan Pertanyaan Terbuka**
 
@@ -342,17 +363,23 @@ Sebuah fitur dinyatakan selesai apabila acceptance criteria terpenuhi, pengujian
 | D-01 | Fokus pemesanan satu destinasi per pesanan | Usulan |
 | D-02 | Pembayaran berupa ringkasan atau simulasi | Usulan |
 | D-03 | Masa berlaku tiket 7 hari sejak tanggal kunjungan | Perlu dikonfirmasi |
-| D-04 | Teknologi yang digunakan: HTML, CSS, JavaScript, Node.js \+ Express, dan SQLite (lihat bagian 13.4) | Diputuskan: SQLite |
-| D-05 | Footer menulis Kelompok 8 pada Beranda dan Galeri, tetapi Kelompok 1 pada Profil dan Data | Perlu disamakan |
-| D-06 | Alur pada halaman Data menyebut 2 rekomendasi di Home, sedangkan Beranda menampilkan 3 | Perlu disamakan |
-| D-07 | Harga tiket Pantai Pulau Anano Rp 159.000 jauh di atas destinasi lain | Perlu diperiksa |
-| D-08 | Daftar anggota dan peran kelompok (Profil) menjadi acuan penanggung jawab tiap fase | Usulan |
-| D-09 | Akun Wisatawan dan Petugas Loket dibuat tim sebagai data awal (tanpa halaman daftar), sesuai desain Figma | Perlu dikonfirmasi ke dosen |
-| D-10 | Frontend dan backend dipisah dengan REST API, dilengkapi dokumentasi API dan pull request per anggota | Diputuskan (arahan dosen) |
+| D-04 | Teknologi yang digunakan: React + Vite (frontend), Node.js \+ Express, dan SQLite (lihat bagian 13.4) | Diperbarui pada versi 1.2: frontend React; SQLite diputuskan |
+| D-05 | Footer seluruh halaman menulis Kelompok 1 (sesuai desain Figma) | Diputuskan |
+| D-06 | Beranda menampilkan 3 rekomendasi destinasi; alur pada halaman Data disesuaikan menjadi 3 | Diputuskan |
+| D-07 | Harga tiket Pantai Pulau Anano diturunkan dari Rp 159.000 menjadi Rp 59.000 karena dinilai terlalu tinggi dibanding destinasi lain; belum ada sumber tarif resmi | Diputuskan untuk prototipe; verifikasi ke Dinas Pariwisata Wakatobi bila ada kesempatan |
+| D-08 | Daftar anggota dan peran kelompok (bagian awal dokumen) menjadi acuan penanggung jawab tiap fase | Usulan |
+| D-09 | Pendaftaran akun tersedia untuk Wisatawan dan Petugas Loket (tidak memakai akun data awal); peran dipilih pada formulir Daftar | Diputuskan |
+| D-13 | Halaman Profil Wakaloka dihapus dari desain baru; navigasi publik berisi Beranda, Galeri, dan Data | Diputuskan |
+| D-12 | Peran Petugas Loket pada formulir Daftar mewajibkan kode petugas yang diberikan pengelola loket (disimpan di konfigurasi server, bukan di database) | Diputuskan |
+| D-10 | Frontend dan backend dipisah dengan REST API, dilengkapi dokumentasi API dan pull request per anggota | Diputuskan (arahan asisten dosen) |
+| D-14 | Frontend memakai framework React (Vite) atas saran asisten dosen; framework bersifat saran, bukan kewajiban, dan kelompok memilih memakainya agar komponen dapat dipakai ulang | Diputuskan |
+| D-15 | Aplikasi mobile memakai React Native dengan Expo (bukan Flutter atau PWA) karena konsepnya sama dengan React di web dan mudah dijelaskan; layar Start, Galeri, Data, dan Terima kasih tidak dibuat di versi awal | Diputuskan |
 | D-11 | Login memakai token di header Authorization, bukan cookie sesi | Usulan |
 
 ## **18\. Referensi**
 
 * Use Case Diagram, Class Diagram, Sequence Diagram, dan ERD (notasi Chen) Wakaloka  
 * Website statis Wakaloka: Beranda, Profil, Galeri, Data  
-* Arahan dosen: frontend dan backend terpisah (REST API), dokumentasi API, kontribusi per anggota lewat pull request, bahasa pemrograman bebas selain PHP, dan program menyesuaikan Figma
+* Arahan asisten dosen: frontend dan backend terpisah (REST API), dokumentasi API, kontribusi per anggota lewat pull request, bahasa pemrograman bebas selain PHP, dan program menyesuaikan Figma  
+* Penjelasan aplikasi mobile: aplikasi yang hanya berjalan di Android/iOS, tidak dapat dijalankan di laptop atau PC (dasar keputusan D-15)  
+* Saran asisten dosen: memakai framework (misalnya React) agar komponen dapat dipakai ulang; bukan kewajiban
