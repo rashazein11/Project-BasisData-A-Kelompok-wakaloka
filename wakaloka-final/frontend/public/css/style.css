@@ -1,0 +1,135 @@
+/* Token desain dari Figma (Panduan implementasi). Ubah warna hanya di sini. */
+@font-face{font-family:Poppins;font-weight:400;font-display:swap;src:url(../assets/fonts/poppins-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:500;font-display:swap;src:url(../assets/fonts/poppins-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:600;font-display:swap;src:url(../assets/fonts/poppins-latin-600-normal.woff2) format("woff2")}
+:root{--ink:#28321D;--olive:#4F5F26;--paper:#FFF4DF;--cream:#FBE1B5;--yellow:#FFDE59;--yellow-d:#F2CB2C;--blue:#7BADCA;--orange:#F89254;--green:#8DA249;--card:#FFFAF0;--line:#D9C9A3;--err:#A32A1B;--ok:#E3EDCB;
+--r-media:4px;--r-ctl:8px;--gutter:16px}
+*{box-sizing:border-box}
+html{scroll-padding-top:120px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 14px/1.6 Poppins,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:600;line-height:1.15}
+h1{margin-bottom:8px}
+h1{font-size:32px}h2{font-size:24px}h3{font-size:16px;line-height:1.3}
+p{margin:0 0 12px}
+:focus-visible{outline:3px solid #1D4E89;outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--yellow);padding:8px 12px;border-radius:var(--r-ctl);z-index:100}
+.skip:focus{left:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Kerangka halaman */
+.wrap{max-width:1280px;margin:0 auto;padding:24px var(--gutter) 56px}
+.top{background:var(--olive);color:#FFF4DF;position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top)}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px var(--gutter);max-width:1440px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:20px;min-height:44px}
+.pub{display:flex;gap:4px;padding:0 var(--gutter) 8px;max-width:1440px;margin:0 auto}
+.pub a,.sub a{color:inherit;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;justify-content:center;flex:1;font-size:13px}
+.pub a[aria-current],.sub a[aria-current]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.menu-btn{background:none;border:0;color:inherit;font:600 14px Poppins,sans-serif;min-height:44px;padding:0 8px;cursor:pointer}
+.sub{background:var(--yellow);color:var(--ink);font-weight:500}
+.sub-in{display:flex;justify-content:space-between;max-width:1440px;margin:0 auto;padding:0 var(--gutter)}
+.sub a{flex:none;min-width:72px}
+.menu-panel{position:fixed;inset:0;background:var(--paper);z-index:30;overflow:auto;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.menu-panel[hidden]{display:none}
+.menu-head{background:var(--olive);color:#FFF4DF;display:flex;justify-content:space-between;align-items:center;padding:10px var(--gutter)}
+.menu-list{padding:24px;display:grid;gap:8px}
+.menu-list a{font-size:20px;text-decoration:none;min-height:48px;display:flex;align-items:center}
+footer{background:var(--olive);color:#FFF4DF;padding:24px var(--gutter) calc(24px + env(safe-area-inset-bottom))}
+.foot{max-width:1280px;margin:0 auto;display:grid;gap:20px;font-size:13px}
+.foot h3{color:var(--yellow);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.foot a{margin-right:12px;display:inline-block;padding:6px 0;text-decoration:none}
+.foot b{font-size:20px}
+
+/* Teks */
+.kicker{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--olive);margin-bottom:8px}
+.lead{font-size:15px;max-width:60ch}
+.muted{color:#5b6446;font-size:13px}
+.crumb{font-size:12px;margin-bottom:12px}
+.crumb a{text-decoration:none;color:var(--olive)}
+
+/* Komponen */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:var(--r-ctl);border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 14px Poppins,sans-serif;cursor:pointer;text-decoration:none;text-align:center;transition:background .2s}
+.btn:hover{background:rgba(40,50,29,.08)}
+.btn-p{background:var(--yellow);border-color:var(--yellow)}
+.btn-p:hover{background:var(--yellow-d);border-color:var(--yellow-d)}
+.btn:disabled,.btn[aria-disabled=true]{background:#D6D6BF;border-color:#D6D6BF;color:#5d5d49;cursor:not-allowed}
+.btn-b{display:flex;width:100%}
+.stack{display:grid;gap:12px}
+.row2>*,.grid>*,.stack>*{min-width:0}
+.row2{display:grid;gap:24px}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-media);display:flex;flex-direction:column;gap:8px;padding-bottom:16px}
+.card>*:not(img){margin-inline:12px}
+.card img,.ph{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-media) var(--r-media) 0 0;margin:0}
+.card .btn{margin-top:auto}
+.price{background:var(--blue);display:flex;justify-content:space-between;padding:6px 12px;font-weight:600;font-size:13px;margin-inline:0!important}
+.band{background:var(--cream);margin:40px calc(var(--gutter)*-1);padding:24px var(--gutter);display:grid;gap:24px;align-items:center}
+.tenun{aspect-ratio:4/3;border-radius:var(--r-media);background:url(../assets/img/tenun.jpg) center/cover}
+.band .tenun{aspect-ratio:816/240;background-image:url(../assets/img/tenun-lebar.jpg)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r-media);padding:16px}
+.panel.cream{background:var(--cream);border-color:var(--cream)}
+.panel.orange{background:var(--orange);border-color:var(--orange)}
+.note{border-left:3px solid var(--olive);background:var(--ok);padding:8px 12px;font-size:12px;border-radius:0 var(--r-ctl) var(--r-ctl) 0}
+.alert{border:1.5px solid var(--err);color:var(--err);background:#fff;padding:10px 12px;border-radius:var(--r-ctl);font-size:13px;margin-bottom:12px}
+.badge{display:inline-block;padding:2px 10px;border-radius:var(--r-media);font-size:12px;font-weight:600;border:1px solid var(--ink)}
+.badge.aktif{background:var(--ok)}.badge.terpakai{background:#D6D6BF}.badge.kedaluwarsa{background:#f6d6cf;border-color:var(--err);color:var(--err)}
+hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:420px}
+th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}
+td.n,th.n{text-align:right;white-space:nowrap}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;word-break:break-all;background:var(--cream);padding:10px 12px;border-radius:var(--r-ctl);user-select:all}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:600;font-size:20px}
+.steps{padding-left:20px}.steps li{margin-bottom:6px}
+dl{margin:0}dt{font-weight:600;margin-top:10px}dd{margin:0 0 4px}
+
+/* Formulir (label selalu terlihat, galat di dekat kolom) */
+.field{margin-bottom:14px}
+label,.lbl{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+input,select{width:100%;min-height:48px;padding:0 12px;border:1.5px solid var(--line);border-radius:var(--r-ctl);background:var(--card);color:var(--ink);font:16px Poppins,sans-serif}
+input[aria-invalid=true]{border-color:var(--err)}
+.err{color:var(--err);font-size:12px;margin-top:4px}
+.hint{font-size:12px;color:#5b6446;margin-top:4px}
+.pw{display:flex;gap:8px}.pw .btn{min-height:48px;padding:0 12px;flex:none}
+.stepper{display:flex;align-items:center;gap:8px}
+.stepper button{width:48px;min-height:48px;font-size:20px;padding:0}
+.stepper input{width:72px;text-align:center}
+.line{display:flex;justify-content:space-between;gap:12px;padding:4px 0}
+.total{font-size:24px;font-weight:600}
+
+@media(min-width:768px){
+ :root{--gutter:40px}
+ h1{font-size:44px}h2{font-size:28px}
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .foot{grid-template-columns:1.4fr 1fr 1fr}
+}
+@media(min-width:1024px){
+ :root{--gutter:80px}
+ h1{font-size:56px}
+ .top-in{padding-block:12px}
+ .pub{padding:0;position:absolute;right:var(--gutter);top:12px;max-width:none;gap:16px}
+ .pub a{flex:none}
+ .top{position:sticky}
+ .menu-btn{display:none}
+ .grid{grid-template-columns:repeat(3,1fr)}
+ .row2{grid-template-columns:1fr 1fr;align-items:center}
+ .row2.top-align{align-items:start}
+ .row-form{grid-template-columns:1.3fr 1fr;align-items:start}
+ .band{grid-template-columns:1fr 1fr}
+ .sub a{min-width:120px}
+}
+@media(max-width:1023px){.sub-in{padding:0 var(--gutter)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* Navigasi bawah (Figma: komponen "Tab bawah"). Hanya di lebar HP dan hanya di layar utama. */
+.tabbar{display:none}
+@media(max-width:767px){
+ .has-tabs .pub,.has-tabs .sub{display:none}
+ .has-tabs footer{padding-bottom:calc(24px + 66px + env(safe-area-inset-bottom))}
+ .tabbar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--cream);border-top:1px solid var(--line);padding:8px 8px calc(6px + env(safe-area-inset-bottom))}
+ .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:56px;padding-top:2px;text-decoration:none;color:#5B6446;font:500 12px/16px Poppins,system-ui,sans-serif}
+ .tabbar .pill{width:56px;height:32px;border-radius:16px;display:grid;place-items:center;transition:background .2s}
+ .tabbar a[aria-current=page]{color:var(--ink);font-weight:600}
+ .tabbar a[aria-current=page] .pill{background:var(--yellow)}
+}

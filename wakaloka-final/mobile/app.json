@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Wakaloka",
+    "slug": "wakaloka",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": { "supportsTablet": false, "bundleIdentifier": "id.wakaloka.app" },
+    "android": { "package": "id.wakaloka.app" },
+    "plugins": ["expo-status-bar", "expo-secure-store"]
+  }
+}
